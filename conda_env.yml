@@ -1,0 +1,9 @@
+channels:
+  - conda-forge
+  - pytorch
+  - pytorch-nightly
+  - defaults
+dependencies:
+  - python
+  - pandas
+

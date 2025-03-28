@@ -1,12 +1,15 @@
 import pandas as pd
+import os
 
 # Read the input CSV file
-input_csv = './data.csv'
+file_dir = os.path.dirname(os.path.abspath(__file__))
+
+input_csv = file_dir + '/data.csv'
 data = pd.read_csv(input_csv)
 
 # Determine the size of the grid
-max_x = data['x'].max()
-max_y = data['y'].max()
+max_x = data['X'].max()
+max_y = data['Y'].max()
 
 # Initialize an empty grid
 grid = [['' for _ in range(max_x + 1)] for _ in range(max_y + 1)]
@@ -17,16 +20,16 @@ for i in range(2, min(12, max_y + 1)):  # Ensure we don't go out of bounds
 
 # Place components in the grid
 for index, row in data.iterrows():
-    x = row['x']
-    y = row['y']
-    component = row['component']
+    x = row['X']
+    y = row['Y']
+    component = row['Component']
     grid[y][x] = component
 
 # Convert grid to DataFrame
 grid_df = pd.DataFrame(grid)
 
 # Save the grid DataFrame to a new CSV file
-output_csv = '/Users/gevorg/my_documents/work/Soton/2023_24_academic_year/MATH6119/code/pcb_grid.csv'
+output_csv = file_dir + '/pcb_grid.csv'
 grid_df.to_csv(output_csv, index=False, header=False)
 
 print(f"Output CSV has been saved to {output_csv}")
