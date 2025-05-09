@@ -21,7 +21,7 @@ st.text("📂 Default Strategy Files (from ./solution)")
 for name in default_files:
     file_path = os.path.join(solution_dir, name)
     if os.path.exists(file_path):
-        st.subheader(f"📄 {name}")
+        st.text(f"{name}")
         df = pd.read_csv(file_path)
         #st.dataframe(df)
 
