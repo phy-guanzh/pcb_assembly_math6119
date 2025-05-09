@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 from collections import Counter
 import numpy as np
+import os
 
 
 max_consecutive_actions = 3
@@ -311,8 +312,8 @@ def main(strategy_folder):
     """
     # print(f"Simulating machine based on the strategy files in: {strategy_folder}")
 
-    code_path = "/Users/gevorg/my_documents/work/Soton/2023_24_academic_year/MATH6119/code"
-
+    current_file_path = os.path.abspath(__file__)
+    code_path = os.path.dirname(current_file_path)
     strategy_file_A = f"{strategy_folder}/machineA.csv"
     strategy_file_B = f"{strategy_folder}/machineB.csv"
     strategy_file_C = f"{strategy_folder}/machineC.csv"
@@ -455,7 +456,7 @@ def main(strategy_folder):
     total_inter_machine_conflicts_penalty = inter_machine_conflicts * per_round_avg_machine_distance * 2
     print(f"Total inter-machine conflicts penalty: {round(total_inter_machine_conflicts_penalty, 2)}")
 
-    # *2 for going back and forth for each missing component, *2 for other machines with 3 heads waiting + 1000 for manual correction
+    # *2 for going back and forth for each missing component, *2 for other machines with 3 heads waiting + 1000 for QA machine check sendback
     missing_components_penalty = len(unmatched) * per_round_avg_machine_distance * 2 * 2 * 3
     missing_components_penalty += 1000 if not missing_components_penalty == 0 else 0
     print(f"Total missing components penalty: {round(missing_components_penalty, 2)} \n")
@@ -466,8 +467,11 @@ def main(strategy_folder):
     # print("Machine simulation completed.")
 
 if __name__ == "__main__":
+    current_file_path = os.path.abspath(__file__)
+    solution_path = os.path.dirname(current_file_path)+"/solution"
+
     parser = argparse.ArgumentParser(description="Machine Simulation.")
-    parser.add_argument('--strategy_folder', type=str, required=False, help='Path to the strategy csv file', default='/Users/gevorg/my_documents/work/Soton/2023_24_academic_year/MATH6119/reports/group 1/solution')
+    parser.add_argument('--strategy_folder', type=str, required=False, help='Path to the strategy csv file', default=solution_path)
 
     args = parser.parse_args()
 
