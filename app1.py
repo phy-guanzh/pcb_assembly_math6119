@@ -66,7 +66,7 @@ if uploaded_files:
 else:
     st.info("No uploaded files. Using default ./solution files.")
     if st.button("🚀 Run machine_sim on Default Files"):
-        cmd = ["python", "./machine_sim.py", "--strategy_folder", "./solution"]
+        cmd = [sys.executable, "machine_sim.py", "--strategy_folder", "./solution"]
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         st.subheader("📊 Simulation Output (Default)")
