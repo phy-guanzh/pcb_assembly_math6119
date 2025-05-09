@@ -13,9 +13,6 @@ App from **Consultancy Buddies** Group
 Three examples are provided — you can update them and then upload to check the new results.
 """)
 
-# -------------------------
-# 1. 显示默认 machineA/B/C.csv 内容 & 下载
-# -------------------------
 solution_dir = "./solution"
 default_files = ["machineA.csv", "machineB.csv", "machineC.csv"]
 
@@ -38,20 +35,13 @@ for name in default_files:
     else:
         st.warning(f"{name} not found in ./solution")
 
-# -------------------------
-# 2. 文件上传（替代默认）
-# -------------------------
-st.header("📤 Upload Your Own Strategy Files")
 
 uploaded_files = st.file_uploader(
-    "Upload your strategy files (machineA.csv, B, C)", 
+    "Upload your own strategy files (machineA.csv, B, C)", 
     accept_multiple_files=True, 
     type=["csv"]
 )
 
-# -------------------------
-# 3. 执行 machine_sim.py
-# -------------------------
 if uploaded_files:
     st.success("✔️ Uploaded files detected. These will be used instead of defaults.")
     if st.button("🚀 Run machine_sim on Uploaded Files"):
