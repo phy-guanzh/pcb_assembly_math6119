@@ -3,6 +3,8 @@ import subprocess
 import tempfile
 import os
 import pandas as pd
+import machine_sim  
+#machine_sim.run_simulation(strategy_folder=tmpdir)
 
 st.set_page_config(page_title="PCB Assembly Simulator", layout="centered")
 
@@ -51,7 +53,7 @@ if uploaded_files:
                 with open(file_path, "wb") as out_file:
                     out_file.write(f.read())
 
-            cmd = ["python3", "./machine_sim.py", "--strategy_folder", tmpdir]
+            cmd = [sys.executable, "./machine_sim.py", "--strategy_folder", tmpdir]
             result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
             st.subheader("📊 Simulation Output")
